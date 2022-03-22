@@ -1,0 +1,48 @@
+CREATE TABLE Dept (
+    Dept_ID varchar(10) NOT NULL,
+    Dept_Name varchar(255),
+    Dept_Location varchar(255),
+    Dept_Phone varchar(20),
+	PRIMARY KEY(Dept_ID)
+);
+
+CREATE TABLE Project (
+    Proj_ID varchar(10) NOT NULL,
+    Proj_Name varchar(255),
+	Proj_Budjet varchar(255),
+	Proj_Start_Date DATE,
+	Proj_End_Date DATE,
+	PRIMARY KEY(Proj_ID)
+);
+
+CREATE TABLE Employee (
+    Emp_ID varchar(10) NOT NULL,
+	Dept_ID varchar(10),
+	Proj_ID varchar(10),
+    Emp_FirstName varchar(255),
+	Emp_MiddleName varchar(255),
+	Emp_LastName varchar(255),
+    Emp_Address varchar(255),
+    Emp_DOB DATE,
+	Emp_DOJ DATE,
+	Emp_Qua varchar(255),
+	PRIMARY KEY(Emp_ID)
+    FOREIGN KEY (Dept_ID) 
+        REFERENCES Dept(Dept_ID)
+    FOREIGN KEY (Proj_ID) 
+        REFERENCES Project(Proj_ID)
+);
+
+CREATE TABLE WorkOn (
+    Emp_ID varchar(10) NOT NULL,
+	Proj_ID varchar(10),
+    WorkHours int NOT NULL,
+    WorkHours_per_Week int NOT NULL,
+    Work_Rate_per_hour varchar(10),
+    Work_Assign_Date varchar(10),
+	Work_Rel_Date varchar(10)
+    FOREIGN KEY (Proj_ID) 
+        REFERENCES Project(Proj_ID)
+    FOREIGN KEY (Emp_ID) 
+        REFERENCES Empployee(Emp_ID)
+);

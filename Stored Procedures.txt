@@ -1,0 +1,320 @@
+
+---------------------------sp_AddDepartmentDetails-----------------------
+
+CREATE PROCEDURE [dbo].[sp_AddDepartmentDetails]
+    -- Add the parameters for the stored procedure here
+    @DepartmentID varchar(10),
+    @DepartmentName varchar(255),
+	@DepartmentLocation varchar(255),
+	@DepartmentPhone varchar(20)
+
+AS
+BEGIN
+    -- SET NOCOUNT ON added to prevent extra result sets from
+    -- interfering with SELECT statements.
+    SET NOCOUNT ON;
+
+        INSERT INTO [PMS_Sprint1].[dbo].[Dept]([Dept_ID],[Dept_Name],[Dept_Location],[Dept_Phone])
+        VALUES(@DepartmentID,@DepartmentName,@DepartmentLocation,@DepartmentPhone)
+
+END
+
+
+
+CREATE PROCEDURE [dbo].[sp_DeleteDepartmentDetails]
+    -- Add the parameters for the stored procedure here
+    @DepartmentID int
+AS
+BEGIN
+    -- SET NOCOUNT ON added to prevent extra result sets from
+    -- interfering with SELECT statements.
+    SET NOCOUNT ON;
+
+    DELETE FROM [dbo].[Dept]
+    where Dept_ID = @DepartmentID
+
+END    
+
+
+-----------------sp_GetAllDepartment-----------------
+
+CREATE PROCEDURE sp_GetAllDepartment
+-- procedure returns all rows from the customer table
+AS BEGIN
+  SELECT * FROM Dept;
+END;
+
+
+-----------------------sp_UpdateDepartmentDetails---------------(check names of @ )
+
+
+
+CREATE PROCEDURE [dbo].[sp_UpdateDepartmentDetails]
+    -- Add the parameters for the stored procedure here
+    @DepartmentID varchar(10),
+    @DepartmentName varchar(255),
+	@DepartmentLocation varchar(255),
+	@DepartmentPhone varchar(20)
+	
+AS
+BEGIN
+    -- SET NOCOUNT ON added to prevent extra result sets from
+    -- interfering with SELECT statements.
+    SET NOCOUNT ON;
+
+    Update [PMS_Sprint1].[dbo].[Dept] 
+    set Dept_Name = @DepartmentName, Dept_Location = @DepartmentLocation, Dept_Phone = @DepartmentPhone
+    where Dept_ID = @DepartmentID;
+
+END
+
+
+
+--------------------sp_AddEmployeeDetails--------------------------------
+
+
+CREATE PROCEDURE [dbo].[sp_AddEmployeeDetails]
+    -- Add the parameters for the stored procedure here
+    @EmployeeID varchar(10) = notnull,
+    @DepartmentID varchar(10),
+	@EmployeeFirstName varchar(255),
+	@EmployeeMiddleName varchar(255),
+	@EmployeeLastName varchar(255),
+	@EmployeeAddress varchar(255),
+	@EmployeeDOB date,
+	@EmployeeDOJ date,
+	@EmployeeQualification varchar(255)
+
+AS
+BEGIN
+    -- SET NOCOUNT ON added to prevent extra result sets from
+    -- interfering with SELECT statements.
+    SET NOCOUNT ON;
+
+        INSERT INTO [PMS_Sprint1].[dbo].[Employee]([Emp_ID],[Dept_ID],[Emp_FirstName],[Emp_MiddleName],[Emp_LastName],[Emp_Address],[Emp_DOB],[Emp_DOJ],[Emp_Qua])
+        VALUES(@EmployeeID, @DepartmentID, @EmployeeFirstName,@EmployeeMiddleName,@EmployeeLastName,@EmployeeAddress,@EmployeeDOB,@EmployeeDOJ,@EmployeeQualification)
+
+END
+
+
+
+
+
+-------------------------delete employee--------------------
+CREATE PROCEDURE [dbo].[sp_DeleteEmloyeeDetails]
+    -- Add the parameters for the stored procedure here
+    @EmployeeID int
+AS
+BEGIN
+    -- SET NOCOUNT ON added to prevent extra result sets from
+    -- interfering with SELECT statements.
+    SET NOCOUNT ON;
+
+    DELETE FROM [dbo].[Employee]
+    where Emp_ID = @EmployeeID
+
+END
+
+
+-----------------sp_GetAllEmployee---------------
+
+CREATE PROCEDURE sp_GetAllEmployee
+-- procedure returns all rows from the customer table
+AS BEGIN
+  SELECT * FROM Employee;
+END;
+
+
+
+-----------------------sp_UpdateEmployeeDetails-------------------
+
+
+CREATE PROCEDURE [dbo].[sp_UpdateEmployeeDetails]
+    -- Add the parameters for the stored procedure here
+    @EmployeeID varchar(10),
+    @DepartmentID varchar(10),
+    @EmployeeFirstName varchar(255),
+	@EmployeeMiddleName varchar(255),
+	@EmployeeLastName varchar(255),
+	@EmployeeAddress varchar(255),
+	@EmployeeDOB date,
+	@EmployeeDOJ date,
+	@EmployeeQuaification varchar(255)
+AS
+BEGIN
+    -- SET NOCOUNT ON added to prevent extra result sets from
+    -- interfering with SELECT statements.
+    SET NOCOUNT ON;
+
+    Update [PMS_Sprint1].[dbo].[Employee] 
+    set Dept_ID = @DepartmentID, Emp_FirstName = @EmployeeFirstName, Emp_MiddleName = @EmployeeMiddleName, Emp_LastName = @EmployeeLastName, Emp_Address = @EmployeeAddress, Emp_DOB = @EmployeeDOB, Emp_DOJ = @EmployeeDOJ, Emp_Qua = @EmployeeQuaification 
+    where Emp_ID = @EmployeeID;
+
+END
+
+
+
+----------------------sp_AddProjectDetails---------------------
+
+
+CREATE PROCEDURE [dbo].[sp_AddProjectDetails]
+    -- Add the parameters for the stored procedure here
+    @ProjectID varchar(10),
+	@DepartmentID varchar(10),
+    @ProjecttName varchar(255),
+	@ProjectBudjet varchar(255),
+	@ProjectStartDate date,
+	@ProjectEndDate date
+
+AS
+BEGIN
+    -- SET NOCOUNT ON added to prevent extra result sets from
+    -- interfering with SELECT statements.
+    SET NOCOUNT ON;
+
+        INSERT INTO [PMS_Sprint1].[dbo].[Project]([Proj_ID],[Dept_ID],[Proj_Name],[Proj_Budjet],[Proj_Start_Date],[Proj_End_Date])
+        VALUES(@ProjectID,@DepartmentID,@ProjecttName,@ProjectBudjet,@ProjectStartDate,@ProjectEndDate)
+
+END
+
+
+
+
+---------------------------delete project------------------
+
+CREATE PROCEDURE [dbo].[sp_DeleteProjectDetails]
+    -- Add the parameters for the stored procedure here
+    @ProjectID varchar(10)
+AS
+BEGIN
+    -- SET NOCOUNT ON added to prevent extra result sets from
+    -- interfering with SELECT statements.
+    SET NOCOUNT ON;
+
+    DELETE FROM [dbo].[Project]
+    where Proj_ID = @ProjectID
+
+END
+
+
+
+-----------------sp_GetAllProjects---------------
+
+CREATE PROCEDURE sp_GetAllProjects
+-- procedure returns all rows from the customer table
+AS BEGIN
+  SELECT * FROM Project;
+END;
+
+
+
+-----------------------sp_UpdateProjectDetails------------------(check names of @ )
+
+
+CREATE PROCEDURE [dbo].[sp_UpdateProjectDetails]
+    -- Add the parameters for the stored procedure here
+    @ProjectID varchar(10),
+	@DepartmentID varchar(10),
+    @ProjectName varchar(255),
+	@ProjectBudjet varchar(255),
+	@ProjectStartDate date,
+	@ProjectEndDate date
+AS
+BEGIN
+    -- SET NOCOUNT ON added to prevent extra result sets from
+    -- interfering with SELECT statements.
+    SET NOCOUNT ON;
+
+    Update [PMS_Sprint1].[dbo].[Project] 
+    set Proj_Name = @ProjectName,Dept_ID = @DepartmentID, Proj_Budjet = @ProjectBudjet, Proj_Start_Date = @ProjectStartDate, Proj_End_Date =@ProjectEndDate
+    where Proj_ID = @ProjectID;
+
+END
+
+
+------------------------------delete workson -------------------------
+
+CREATE PROCEDURE [dbo].[sp_DeleteWorksOnDetails]
+    -- Add the parameters for the stored procedure here
+    @EmployeeID varchar(10)
+AS
+BEGIN
+    -- SET NOCOUNT ON added to prevent extra result sets from
+    -- interfering with SELECT statements.
+    SET NOCOUNT ON;
+
+    DELETE FROM [dbo].[WorkOn]
+    where Emp_ID = @EmployeeID
+
+END
+
+
+
+-------------------sp_AddWorksOnDetails-----------------------------
+
+
+
+CREATE PROCEDURE [dbo].[sp_AddWorksOnDetails]
+    -- Add the parameters for the stored procedure here
+    @EmployeeID varchar(10) = notnull,
+    @ProjectID varchar(10),
+	@WorkHours int,
+	@WorkHours_per_Week int,
+	@Work_Rate_per_hour varchar(10),
+	@Work_Assign_Date date,
+	@Work_Rel_Date date
+
+
+AS
+BEGIN
+    -- SET NOCOUNT ON added to prevent extra result sets from
+    -- interfering with SELECT statements.
+    SET NOCOUNT ON;
+
+        INSERT INTO [PMS_Sprint1].[dbo].[WorkOn]([Emp_ID],[Proj_ID],[WorkHours],[WorkHours_per_Week],[Work_Rate_per_hour],[Work_Assign_Date],[Work_Rel_Date])
+        VALUES(@EmployeeID, @ProjectID, @WorkHours, @WorkHours_per_Week, @Work_Rate_per_hour, @Work_Assign_Date, @Work_Rel_Date)
+
+END
+
+
+
+
+----------------------sp_UpdateWorksOnDetails-----------------------(check names of @ )
+
+
+CREATE PROCEDURE [dbo].[sp_UpdateWorksOnDetails]
+    -- Add the parameters for the stored procedure here
+    @EmployeeID varchar(10),
+    @ProjectID varchar(10),
+    @WorkHours int,
+	@WorkHours_per_Week int,
+	@Work_Rate_per_hour varchar(10),
+	@Work_Assign_Date varchar(10),
+	@Work_Rel_Date varchar(10)
+AS
+BEGIN
+    -- SET NOCOUNT ON added to prevent extra result sets from
+    -- interfering with SELECT statements.
+    SET NOCOUNT ON;
+
+    Update [PMS_Sprint1].[dbo].[WorkOn] 
+    set Proj_ID = @ProjectID, WorkHours = @WorkHours, WorkHours_per_Week = @WorkHours_per_Week, Work_Rate_per_hour = @Work_Rate_per_hour, Work_Assign_Date = @Work_Assign_Date, Work_Rel_Date = @Work_Rel_Date
+    where Emp_ID = @EmployeeID;
+
+END
+
+
+
+-----------------sp_GetAllWorksOnDetails---------------
+
+CREATE PROCEDURE sp_GetAllWorksOnDetails
+-- procedure returns all rows from the customer table
+AS BEGIN
+  SELECT *
+  FROM WorkOn;
+END;
+
+
+
+
+
